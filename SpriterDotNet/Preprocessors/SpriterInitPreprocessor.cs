@@ -3,6 +3,7 @@
 // This software may be modified and distributed under the terms
 // of the zlib license.  See the LICENSE file for details.
 
+using System;
 using System.Linq;
 
 namespace SpriterDotNet.Preprocessors
@@ -16,10 +17,14 @@ namespace SpriterDotNet.Preprocessors
 
         protected virtual void Init(Spriter spriter)
         {
+            if (spriter.Entities == null)
+                return;
             foreach (SpriterEntity entity in spriter.Entities)
             {
                 entity.Spriter = spriter;
                 if (entity.ObjectInfos == null) entity.ObjectInfos = new SpriterObjectInfo[0];
+                if (entity.Animations == null)
+                    return;
                 foreach (SpriterAnimation animation in entity.Animations)
                 {
                     animation.Entity = entity;
@@ -41,9 +46,9 @@ namespace SpriterDotNet.Preprocessors
                         select o;
 
             foreach (SpriterObject info in infos)
-            {
-                SpriterFile file = animation.Entity.Spriter.Folders[info.FolderId].Files[info.FileId];
-                info.PivotX = file.PivotX;
+			{
+				SpriterFile file = animation.Entity.Spriter.Folders[info.FolderId].Files[info.FileId];
+				info.PivotX = file.PivotX;
                 info.PivotY = file.PivotY;
             }
         }
