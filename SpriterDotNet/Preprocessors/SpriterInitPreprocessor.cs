@@ -3,7 +3,6 @@
 // This software may be modified and distributed under the terms
 // of the zlib license.  See the LICENSE file for details.
 
-using System;
 using System.Linq;
 
 namespace SpriterDotNet.Preprocessors
@@ -46,9 +45,9 @@ namespace SpriterDotNet.Preprocessors
                         select o;
 
             foreach (SpriterObject info in infos)
-			{
-				SpriterFile file = animation.Entity.Spriter.Folders[info.FolderId].Files[info.FileId];
-				info.PivotX = file.PivotX;
+            {
+                SpriterFile file = animation.Entity.Spriter.Folders[info.FolderId].Files[info.FileId];
+                info.PivotX = file.PivotX;
                 info.PivotY = file.PivotY;
             }
         }
